@@ -1,3 +1,6 @@
+Understood Many to Many Relationship between the entities
+
+
 Create Recipes
 POST : http://localhost:8080/recipes
 ```
