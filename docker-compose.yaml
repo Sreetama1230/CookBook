@@ -1,0 +1,46 @@
+version: "3.3"
+
+
+services:
+
+ db:
+   image: mysql:8
+   container_name: cookbook-mysql
+   environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: cookbook_db
+      MYSQL_USER: cookbook_user
+      MYSQL_PASSWORD: cookbook_pass
+   volumes:
+     - cookbook-mysql-data:/var/lib/mysql
+   ports:
+     - "3307:3306"
+   networks:
+     - cookbook-net
+
+ app:
+    build: .
+    container_name: cookbook-goapp
+    depends_on:
+     - db
+    environment:
+     DB_HOST: db
+     DB_USER: cookbook_user
+     DB_PASSWORD: cookbook_pass
+     DB_NAME: cookbook_db
+    ports:
+     - "8080:8080"
+    networks:
+      - cookbook-net
+  
+volumes:
+  cookbook-mysql-data:
+
+networks:
+     cookbook-net:
+
+
+
+   
+
+   
